@@ -13,7 +13,7 @@ const request = require('request');
 
 // Use request to fetch IP address from JSON API
 const fetchMyIP = function(callback) {
-  request('https://api.ipify.org?format=json', (error, response, body) => {
+  request('https://apsdsdi.ipify.org?format=json', (error, response, body) => {
     // error can be set if invalid domain, user is offline, etc.
     if (error) {
       callback(error, null);
@@ -32,7 +32,7 @@ const fetchMyIP = function(callback) {
     const object = JSON.parse(body);
     const ip = object['ip'];
 
-    callback(error, ip);
+    callback(null, ip);
   });
 };
 
