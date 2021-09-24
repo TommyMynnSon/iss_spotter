@@ -1,11 +1,11 @@
-const { fetchMyIP } = require('./iss');
+// const { fetchMyIP } = require('./iss');
 
-fetchMyIP((error, ip) => {
-  if (error) {
-    console.log("It didn't work!", error);
+// fetchMyIP((error, ip) => {
+//   if (error) {
+//     console.log("It didn't work!", error);
 
-    return;
-  }
+//     return;
+//   }
 
-  console.log('It worked! Returned IP:', ip);
-});
+//   console.log('It worked! Returned IP:', ip);
+// });
