@@ -1,0 +1,36 @@
+const request = require('request-promise-native');
+const { printPassTimes } = require('./printPassTimes');
+
+const fetchMyIP = () => {
+  // Returns a Promise
+  return request("https://api.ipify.org?format=json");
+};
+
+const fetchCoordsByIP = (body) => {
+  const ip = JSON.parse(body).ip;
+
+  // Returns a Promise
+  return request(`https://freegeoip.app/json/${ip}`);
+};
+
+const fetchISSFlyOverTimes = (body) => {
+  const { latitude, longitude } = JSON.parse(body);
+
+  return request(`https://iss-pass.herokuapp.com/json/?lat=${latitude}&lon=${longitude}`);
+};
+
+const nextISSTimesForMyLocation = () => {
+  fetchMyIP()
+    .then(fetchCoordsByIP)
+    .then(fetchISSFlyOverTimes)
+    .then((body) => {
+      const { response } = JSON.parse(body);
+
+      return response;
+    })
+    .then(printPassTimes);
+};
+
+module.exports = {
+  nextISSTimesForMyLocation
+};
