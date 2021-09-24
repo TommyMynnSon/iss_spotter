@@ -1,5 +1,4 @@
 const request = require('request-promise-native');
-const { printPassTimes } = require('./printPassTimes');
 
 const fetchMyIP = () => {
   // Returns a Promise
@@ -20,15 +19,14 @@ const fetchISSFlyOverTimes = (body) => {
 };
 
 const nextISSTimesForMyLocation = () => {
-  fetchMyIP()
+  return fetchMyIP()
     .then(fetchCoordsByIP)
     .then(fetchISSFlyOverTimes)
     .then((body) => {
       const { response } = JSON.parse(body);
 
       return response;
-    })
-    .then(printPassTimes);
+    });
 };
 
 module.exports = {
